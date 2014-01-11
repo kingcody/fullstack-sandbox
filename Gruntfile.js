@@ -59,9 +59,9 @@ module.exports = function (grunt) {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
-      styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+      less: {
+        files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+        tasks: ['less:server', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -157,7 +157,27 @@ module.exports = function (grunt) {
       }
     },
     
-    
+    less: {
+      dist: {
+        options: {
+          paths: ['<%= yeoman.app %>/styles'],
+          compress: true,
+          cleancss: true
+        },
+        files: {
+          ".tmp/styles/main.css": "<%= yeoman.app %>/styles/main.less"
+        }
+      },
+      server: {
+        options: {
+          paths: ['<%= yeoman.app %>/styles'],
+          report: 'min'
+        },
+        files: {
+          ".tmp/styles/main.css": "<%= yeoman.app %>/styles/main.less"
+        }
+      }
+    },
 
     // Renames files for browser caching purposes
     rev: {
@@ -298,25 +318,19 @@ module.exports = function (grunt) {
             'lib/**/*'
           ]
         }]
-      },
-      styles: {
-        expand: true,
-        cwd: '<%= yeoman.app %>/styles',
-        dest: '.tmp/styles/',
-        src: '{,*/}*.css'
       }
     },
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'copy:styles'
+        'less:server'
       ],
       test: [
-        'copy:styles'
+        'less:server'
       ],
       dist: [
-        'copy:styles',
+        'less:dist',
         'imagemin',
         'svgmin',
         'htmlmin'
