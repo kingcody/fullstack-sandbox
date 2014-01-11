@@ -16,7 +16,6 @@ pids
 logs
 results
 heroku
-views
 
 npm-debug.log
 config/runtime.json
