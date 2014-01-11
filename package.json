@@ -1,6 +1,6 @@
 {
   "name": "fullstacksandbox",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "dependencies": {
     "express": "~3.4.3",
     "jade": "latest",
