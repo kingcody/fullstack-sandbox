@@ -6,10 +6,16 @@ lib-cov
 *.out
 *.pid
 *.gz
+*.tmp
+*.sass-cache
 
+app/bower_components
+node_modules
+public
 pids
 logs
 results
+heroku
+views
 
 npm-debug.log
-node_modules
