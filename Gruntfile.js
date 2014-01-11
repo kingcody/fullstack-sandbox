@@ -15,6 +15,9 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  // Define the global configuration
+  var config = require('config');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -27,17 +30,17 @@ module.exports = function (grunt) {
     },
     express: {
       options: {
-        port: process.env.PORT || 9000
+        port: process.env.PORT || config.express.port
       },
       dev: {
         options: {
-          script: 'server.js',
+          script: config.express.script,
           debug: true
         }
       },
       prod: {
         options: {
-          script: 'server.js',
+          script: config.express.script,
           node_env: 'production'
         }
       }
